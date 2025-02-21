@@ -1,32 +1,55 @@
 <%- include('partials/header', { title: title }) %>
 <main>
-    <section class="product-detail">
+  <section class="product-detail">
+    <div class="product-container">
+      <div class="product-image">
+        <img src="<%= product.image %>" alt="<%= product.name %>">
+      </div>
+      <div class="product-info">
         <h2><%= product.name %></h2>
-        <p>Price: $<%= product.price %></p>
-        <p>Product ID: <%= product.data_id %></p>
-        <p>
-          <a href="<%= product.url %>" target="_blank" class="btn">
-            Visit Product Page
-          </a>
-        </p>
-        
-        <div class="specifications">
-            <h3>Specifications</h3>
-            <% if (product.specifications) { %>
-                <% Object.keys(product.specifications).forEach(section => { %>
-                    <div class="spec-section">
-                        <h4><%= section %></h4>
-                        <ul>
-                            <% Object.keys(product.specifications[section]).forEach(key => { %>
-                                <li><strong><%= key %>:</strong> <%= product.specifications[section][key] %></li>
-                            <% }); %>
-                        </ul>
-                    </div>
-                <% }); %>
-            <% } else { %>
-                <p>No specifications available.</p>
-            <% } %>
-        </div>
-    </section>
+        <p class="price">Price: $<%= product.price %></p>
+        <p class="product-id">Product ID: <%= product.data_id %></p>
+      </div>
+    </div>
+    
+    <!-- Кнопка вынесена снизу основного блока -->
+    <div class="spec-button-container">
+      <button id="toggleSpecs" class="btn">Show Specifications</button>
+    </div>
+    
+    <div id="specifications" class="specifications" style="display: none;">
+      <h3>Specifications</h3>
+      <% if (product.specifications) { %>
+        <% Object.keys(product.specifications).forEach(section => { %>
+          <div class="spec-section">
+            <h4><%= section %></h4>
+            <ul>
+              <% Object.keys(product.specifications[section]).forEach(key => { %>
+                <li><strong><%= key %>:</strong> <%= product.specifications[section][key] %></li>
+              <% }); %>
+            </ul>
+          </div>
+        <% }); %>
+      <% } else { %>
+        <p>No specifications available.</p>
+      <% } %>
+    </div>
+  </section>
 </main>
+
+<script>
+  const toggleSpecsButton = document.getElementById('toggleSpecs');
+  const specificationsDiv = document.getElementById('specifications');
+
+  toggleSpecsButton.addEventListener('click', () => {
+    if (specificationsDiv.style.display === 'none' || specificationsDiv.style.display === '') {
+      specificationsDiv.style.display = 'block';
+      toggleSpecsButton.textContent = 'Hide Specifications';
+    } else {
+      specificationsDiv.style.display = 'none';
+      toggleSpecsButton.textContent = 'Show Specifications';
+    }
+  });
+</script>
 <%- include('partials/footer') %>
+

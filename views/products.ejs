@@ -6,7 +6,13 @@
             <div class="product-grid">
                 <% products.forEach(product => { %>
                     <div class="product-card">
-                        <h3><a href="/products/<%= category %>/<%= product._id %>"><%= product.name %></a></h3>
+                        <!-- Вывод изображения товара -->
+                        <img src="<%= product.image %>" alt="<%= product.name %>" class="product-image">
+                        <h3>
+                            <a href="/products/<%= category %>/<%= product._id %>">
+                                <%= product.name %>
+                            </a>
+                        </h3>
                         <p>Price: $<%= product.price %></p>
                         <a href="/products/<%= category %>/<%= product._id %>" class="btn">View Details</a>
                     </div>
@@ -18,3 +24,4 @@
     </section>
 </main>
 <%- include('partials/footer') %>
+
