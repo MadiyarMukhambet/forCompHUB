@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= title %> - Electronics Store</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Electronics Store</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/products/monitors">Monitors</a></li>
+                <li><a href="/products/mice">Mice</a></li>
+                <li><a href="/products/microphones">Microphones</a></li>
+                <li><a href="/products/headphones">Headphones</a></li>
+                <li><a href="/products/keyboards">Keyboards</a></li>
+            </ul>
+        </nav>
+        <nav>
+            <ul>
+                <% if (locals.user) { %>
+                    <li><span>Welcome, <%= locals.user.username %></span></li>
+                    <li><a href="/logout">Logout</a></li>
+                    <% if (locals.user.role === 'admin') { %>
+                       <li><a href="/admin/users">Admin Panel</a></li>
+                    <% } %>
+                <% } else { %>
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="/register">Register</a></li>
+                <% } %>
+            </ul>
+        </nav>
+    </header>
+</body>
+</html>

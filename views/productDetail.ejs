@@ -1,0 +1,32 @@
+<%- include('partials/header', { title: title }) %>
+<main>
+    <section class="product-detail">
+        <h2><%= product.name %></h2>
+        <p>Price: $<%= product.price %></p>
+        <p>Product ID: <%= product.data_id %></p>
+        <p>
+          <a href="<%= product.url %>" target="_blank" class="btn">
+            Visit Product Page
+          </a>
+        </p>
+        
+        <div class="specifications">
+            <h3>Specifications</h3>
+            <% if (product.specifications) { %>
+                <% Object.keys(product.specifications).forEach(section => { %>
+                    <div class="spec-section">
+                        <h4><%= section %></h4>
+                        <ul>
+                            <% Object.keys(product.specifications[section]).forEach(key => { %>
+                                <li><strong><%= key %>:</strong> <%= product.specifications[section][key] %></li>
+                            <% }); %>
+                        </ul>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <p>No specifications available.</p>
+            <% } %>
+        </div>
+    </section>
+</main>
+<%- include('partials/footer') %>

@@ -1,0 +1,21 @@
+<%- include('../partials/header', { title: 'Edit User' }) %>
+
+<main>
+    <h2>Edit User</h2>
+    <form action="/admin/users/<%= user._id %>?_method=PUT" method="POST">
+        <label for="username">Username:</label>
+        <input type="text" name="username" value="<%= user.username %>" required><br>
+        <label for="email">Email:</label>
+        <input type="email" name="email" value="<%= user.email %>" required><br>
+        <label for="password">Password (leave blank to keep current):</label>
+        <input type="password" name="password"><br>
+        <label for="role">Role:</label>
+        <select name="role">
+            <option value="user" <%= user.role === 'user' ? 'selected' : '' %>>User</option>
+            <option value="admin" <%= user.role === 'admin' ? 'selected' : '' %>>Admin</option>
+        </select><br>
+        <button type="submit">Update</button>
+    </form>
+</main>
+
+<%- include('../partials/footer') %>
