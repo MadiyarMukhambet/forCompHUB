@@ -1,0 +1,123 @@
+<%- include('partials/header', { title: 'Your Cart' }) %>
+<style>
+  /* Carousel Container */
+  .carousel-container {
+    position: relative;
+    width: 100%;
+    margin: 20px 0;
+  }
+
+  /* Carousel Styles */
+  .carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 20px;
+    padding: 20px 0;
+    scroll-behavior: smooth;
+  }
+  
+  .carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Carousel Navigation Buttons */
+  .carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(17, 17, 17, 0.8);
+    color: #ff1493;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1;
+    font-size: 24px;
+    border-radius: 50%;
+  }
+
+  .carousel-button.left {
+    left: 10px;
+  }
+
+  .carousel-button.right {
+    right: 10px;
+  }
+
+  /* Product Card (Блок товара) */
+  .product-card {
+    background-color: #222;
+    padding: 20px;
+    border-radius: 8px;
+    flex: 0 0 300px; /* Фиксированная ширина для элементов карусели */
+    box-sizing: border-box;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(255, 20, 147, 0.8); /* Неоновое розовое свечение */
+    scroll-snap-align: start;
+  }
+
+  .product-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+
+  .product-card h4 {
+    color: #ff1493;
+    margin: 0 0 10px;
+  }
+
+  .product-card p {
+    margin: 10px 0;
+  }
+
+  .product-card form {
+    margin: 10px 0;
+  }
+</style>
+<script>
+  function scrollCarousel(offset) {
+    const carousel = document.querySelector('.carousel');
+    carousel.scrollBy({ left: offset, behavior: 'smooth' });
+  }
+</script>
+<main>
+  <h2>Your Cart</h2>
+  <% if (order && order.items.length) { %>
+    <div class="carousel-container">
+      <button class="carousel-button left" onclick="scrollCarousel(-300)">&#10094;</button>
+      <div class="carousel">
+        <% order.items.forEach(item => { %>
+          <div class="product-card">
+            <img src="<%= item.product.image %>" alt="<%= item.product.name %>">
+            <h4><%= item.product.name %></h4>
+            <p>Quantity: <%= item.quantity %></p>
+            <p>Price: ₸<%= item.product.price %></p>
+            <p>Subtotal: ₸<%= item.product.price * item.quantity %></p>
+            <form action="/cart/update" method="POST">
+              <input type="hidden" name="productId" value="<%= item.product._id %>">
+              <input type="hidden" name="category" value="<%= item.onModel.toLowerCase() %>">
+              <input type="number" name="quantity" value="<%= item.quantity %>" min="1">
+              <button type="submit" class="btn">Update</button>
+            </form>
+            <form action="/cart/delete" method="POST">
+              <input type="hidden" name="productId" value="<%= item.product._id %>">
+              <input type="hidden" name="category" value="<%= item.onModel.toLowerCase() %>">
+              <button type="submit" class="btn">Remove</button>
+            </form>
+          </div>
+        <% }); %>
+      </div>
+      <button class="carousel-button right" onclick="scrollCarousel(300)">&#10095;</button>
+    </div>
+    <p><strong>Total: ₸<%= order.total %></strong></p>
+    <a href="/checkout" class="btn">Checkout</a>
+  <% } else { %>
+    <p>Your cart is empty.</p>
+  <% } %>
+</main>
+<%- include('partials/footer') %>
+
+
+

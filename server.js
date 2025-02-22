@@ -18,6 +18,7 @@ const Keyboard = require('./models/Keyboard');
 // Import controllers for authentication and orders
 const authController = require('./controllers/authController');
 const orderController = require('./controllers/orderController');
+const cartRoutes = require('./routes/cart');
 
 // Import middleware for authentication (JWT protection)
 const adminRoutes = require('./routes/admin');
@@ -51,6 +52,7 @@ connectDB();
 // Защищаем маршрут админ-панели middleware авторизации
 app.use('/admin', authMiddleware, adminRoutes);
 app.use('/admin', adminProductsRouter);
+app.use('/cart', cartRoutes);
 // Map product categories to their corresponding models
 const categoryMap = {
   monitors: Monitor,
@@ -96,12 +98,14 @@ app.get('/products/:category/:id', async (req, res) => {
     if (!product) {
       return res.status(404).send('Product not found');
     }
-    res.render('productDetail', { title: product.name, product });
+    // Передаём также переменную category в шаблон
+    res.render('productDetail', { title: product.name, product, category });
   } catch (err) {
     console.error(err);
     res.status(500).send('Server Error');
   }
 });
+
 
 // Legacy routes redirection (for backward compatibility)
 app.get('/monitors', (req, res) => res.redirect('/products/monitors'));

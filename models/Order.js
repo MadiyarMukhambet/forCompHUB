@@ -1,15 +1,22 @@
-// models/Order.js
 const mongoose = require('mongoose');
 
 const OrderSchema = new mongoose.Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-    // Массив заказанных товаров. Каждый элемент содержит идентификатор товара, категорию и количество.
     items: [{
-        productId: { type: mongoose.Schema.Types.ObjectId, required: true },
-        category: { type: String, required: true },
+        product: { 
+            type: mongoose.Schema.Types.ObjectId, 
+            required: true, 
+            refPath: 'items.onModel' 
+        },
+        onModel: { 
+            type: String, 
+            required: true, 
+            enum: ['Monitor', 'Mouse', 'Microphone', 'Headphone', 'Keyboard'] 
+          },          
         quantity: { type: Number, required: true, default: 1 }
     }],
-    total: { type: Number, required: true },
+    total: { type: Number, required: true, default: 0 },
+    status: { type: String, enum: ['cart', 'pending', 'completed'], default: 'cart' },
     createdAt: { type: Date, default: Date.now }
 });
 
