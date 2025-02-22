@@ -1,0 +1,148 @@
+<style>
+  /* Общие стили для админ-панели */
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #000; /* Чёрный фон */
+    color: #fff; /* Белый текст */
+  }
+  
+  main {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #111; /* Тёмный фон */
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(255, 20, 147, 0.5); /* Неоновое розовое свечение */
+  }
+  
+  h2, h3 {
+    margin-top: 0;
+    color: #ff1493; /* Неоновый розовый для заголовков */
+  }
+  
+  /* Стили для форм */
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  form label {
+    font-weight: bold;
+  }
+  
+  form input[type="text"],
+  form input[type="url"],
+  form input[type="number"],
+  form input[type="email"],
+  form input[type="password"],
+  form textarea,
+  form select {
+    padding: 8px;
+    border: 1px solid #333; /* Тёмная рамка */
+    border-radius: 3px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #222; /* Фон для инпутов */
+    color: #fff;
+  }
+  
+  form textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  form button.btn,
+  form button {
+    margin-top: 15px;
+    padding: 10px 15px;
+    border: none;
+    background-color: #ff1493; /* Неоновый розовый */
+    color: #000; /* Чёрный текст */
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  form button.btn:hover,
+  form button:hover {
+    background-color: #ff69b4; /* Светлее при наведении */
+  }
+  
+  /* Стили навигации */
+  .admin-nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+  }
+  
+  .admin-nav ul li a {
+    display: inline-block;
+    text-decoration: none;
+    padding: 8px 12px;
+    background-color: #ff1493;
+    color: #000;
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .admin-nav ul li a:hover {
+    background-color: #ff69b4;
+  }
+  
+  /* Навигация по категориям */
+  .admin-categories {
+    margin-bottom: 20px;
+  }
+  
+  .admin-categories a {
+    margin-right: 10px;
+    padding: 8px 12px;
+    background-color: #ff1493;
+    color: #000;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .admin-categories a:hover {
+    background-color: #ff69b4;
+  }
+  
+  /* Стили таблиц */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  table th,
+  table td {
+    padding: 10px;
+    border: 1px solid #333;
+    text-align: left;
+  }
+  
+  table th {
+    background-color: #111;
+    color: #ff1493;
+  }
+  
+  table img {
+    display: block;
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+  }
+  
+  /* Общие стили ссылок */
+  a {
+    text-decoration: none;
+    color: #ff1493;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+</style>

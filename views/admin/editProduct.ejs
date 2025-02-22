@@ -1,0 +1,35 @@
+<%- include('../partials/header', { title: 'Edit Product' }) %>
+<%- include('../partials/adminStyles') %>
+
+<main>
+  <h2>Edit Product - <%= product.name %> (<%= category.charAt(0).toUpperCase() + category.slice(1) %>)</h2>
+  <form action="/admin/products/<%= product._id %>?_method=PUT&category=<%= category %>" method="POST">
+    <label for="name">Name:</label>
+    <input type="text" name="name" value="<%= product.name %>" required><br>
+    
+    <label for="url">Product URL:</label>
+    <input type="url" name="url" value="<%= product.url %>" placeholder="https://shop.kz/offer/..."><br>
+    
+    <label for="price">Price:</label>
+    <input type="number" name="price" value="<%= product.price %>" required step="0.01"><br>
+    
+    <label for="data_id">Data ID:</label>
+    <input type="number" name="data_id" value="<%= product.data_id %>" required><br>
+    
+    <label for="image">Image URL:</label>
+    <% if (product.image) { %>
+      <img src="<%= product.image %>" alt="<%= product.name %>" style="width:300px; height:300px; object-fit:cover; margin-bottom:10px;"><br>
+    <% } %>
+    <input type="url" name="image" value="<%= product.image %>" placeholder="https://example.com/image.jpg" required><br>
+    
+    <label for="specifications">Specifications (JSON format):</label>
+    <textarea name="specifications" placeholder='{"Технические характеристики": {"UID товара": "", "Производитель": "", "Модель": "", "Тип": "", "Размеры": "", "Вес": ""}}' required>
+<%= product.specifications ? JSON.stringify(product.specifications, null, 2) : '' %>
+    </textarea><br>
+    
+    <button type="submit" class="btn">Update Product</button>
+  </form>
+</main>
+
+<%- include('../partials/footer') %>
+

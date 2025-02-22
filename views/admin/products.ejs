@@ -1,0 +1,51 @@
+<%- include('../partials/header', { title: 'Admin Panel - Products' }) %>
+<%- include('../partials/adminStyles') %>
+
+<main>
+  <h2>Manage Products - <%= category.charAt(0).toUpperCase() + category.slice(1) %></h2>
+  
+  <!-- Навигация по категориям -->
+  <nav class="admin-categories">
+    <a href="/admin/products?category=monitors">Monitors</a>
+    <a href="/admin/products?category=mice">Mice</a>
+    <a href="/admin/products?category=microphones">Microphones</a>
+    <a href="/admin/products?category=headphones">Headphones</a>
+    <a href="/admin/products?category=keyboards">Keyboards</a>
+  </nav>
+
+  <a href="/admin/products/create?category=<%= category %>" class="btn">Create New Product</a>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Image</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% products.forEach(product => { %>
+      <tr>
+        <td><%= product.name %></td>
+        <td><%= product.price %></td>
+        <td>
+            <% if (product.image) { %>
+              <img src="<%= product.image %>" alt="<%= product.name %>" style="width:300px;height:300px;object-fit:cover;">
+            <% } else { %>
+              No Image
+            <% } %>
+          </td>          
+        <td>
+          <a href="/admin/products/<%= product._id %>/edit?category=<%= category %>">Edit</a>
+          <form action="/admin/products/<%= product._id %>?_method=DELETE&category=<%= category %>" method="POST" style="display:inline;">
+            <button type="submit">Delete</button>
+          </form>
+        </td>
+      </tr>
+      <% }); %>
+    </tbody>
+  </table>
+</main>
+
+<%- include('../partials/footer') %>

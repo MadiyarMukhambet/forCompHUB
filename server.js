@@ -7,6 +7,7 @@ const authRoutes = require('./routes/auth');
 const cookieParser = require('cookie-parser');
 const methodOverride = require('method-override');
 const requireAuth = require('./middleware/requireAuth');
+const adminProductsRouter = require('./routes/adminProducts');
 // Import product models
 const Monitor = require('./models/Monitor');
 const Mouse = require('./models/Mouse');
@@ -24,6 +25,8 @@ const authMiddleware = require('./middleware/authMiddleware');
 const setUser = require('./middleware/setUser'); // Добавлено для установки res.locals.user
 
 const app = express();
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // Set up EJS as the templating engine
 app.set('view engine', 'ejs');
@@ -47,7 +50,7 @@ connectDB();
 
 // Защищаем маршрут админ-панели middleware авторизации
 app.use('/admin', authMiddleware, adminRoutes);
-
+app.use('/admin', adminProductsRouter);
 // Map product categories to their corresponding models
 const categoryMap = {
   monitors: Monitor,

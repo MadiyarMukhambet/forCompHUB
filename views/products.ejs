@@ -7,7 +7,7 @@
                 <% products.forEach(product => { %>
                     <div class="product-card">
                         <!-- Вывод изображения товара -->
-                        <img src="<%= product.image %>" alt="<%= product.name %>" class="product-image">
+                        <img src="<%= product.image %>" alt="<%= product.name %>" class="product-image" style="width:300px; height:300px; object-fit:cover; margin-bottom:10px;">
                         <h3>
                             <a href="/products/<%= category %>/<%= product._id %>">
                                 <%= product.name %>

@@ -1,4 +1,3 @@
-// models/Headphone.js
 const mongoose = require('mongoose');
 
 const GenericProductSchema = new mongoose.Schema({
@@ -6,8 +5,9 @@ const GenericProductSchema = new mongoose.Schema({
     url: { type: String },
     price: { type: Number },
     data_id: { type: Number },
-    title: { type: String },
+    image: { type: String }, // Новое поле image для URL изображения
     specifications: { type: mongoose.Schema.Types.Mixed }
 });
 
 module.exports = mongoose.model('Headphone', GenericProductSchema);
+

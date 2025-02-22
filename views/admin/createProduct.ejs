@@ -1,0 +1,30 @@
+<%- include('../partials/header', { title: 'Create Product' }) %>
+<%- include('../partials/adminStyles') %>
+
+<main>
+  <h2>Create Product - <%= category.charAt(0).toUpperCase() + category.slice(1) %></h2>
+  <form action="/admin/products?category=<%= category %>" method="POST">
+    <label for="name">Name:</label>
+    <input type="text" name="name" required><br>
+    
+    <label for="url">Product URL:</label>
+    <input type="url" name="url" placeholder="https://shop.kz/offer/..." ><br>
+    
+    <label for="price">Price:</label>
+    <input type="number" name="price" required step="0.01"><br>
+    
+    <label for="data_id">Data ID:</label>
+    <input type="number" name="data_id" required><br>
+    
+    <label for="image">Image URL:</label>
+    <input type="url" name="image" placeholder="https://example.com/image.jpg" required><br>
+    
+    <label for="specifications">Specifications (JSON format):</label>
+    <textarea name="specifications" placeholder='{"Технические характеристики": {"UID товара": "", "Производитель": "", "Модель": "", "Тип": "", "Размеры": "", "Вес": ""}}'></textarea><br>
+    
+    <button type="submit" class="btn">Create Product</button>
+  </form>
+</main>
+
+<%- include('../partials/footer') %>
+

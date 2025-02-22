@@ -53,10 +53,9 @@ footer {
     padding: 20px;
     text-align: center;
     color: #aaa;
-    position: fixed;
-    bottom: 0;
     width: 100%;
-}
+  }
+  
 
 /* Main Content Styles */
 main {
